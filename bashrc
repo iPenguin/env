@@ -7,8 +7,14 @@
 #  . ~/.bashrc
 #fi
 
+#NOTE: remove all empty directories below the current dir:
+#find -depth -type d -empty -exec rmdir {} \;
 
-alias ls='ls -G'
+#Mac color ls:
+#alias ls='ls -G'
+#linux
+#alias ls='ls -aFh --color'
+
 alias lsd='ls -aFh --color --group-directories-first'
 alias cp='cp -i'
 alias df='df -h'
@@ -19,7 +25,14 @@ alias less='less -R'
 
 alias git-netbook='git pull --tags netbook working'
 alias git-desktop='git pull --all --tags'
+
+alias sftpsws='sftp -i ~/.ssh/StitchWorksSoftware_dsa stitchw1@stitchworkssoftware.com'
+alias sshsws='ssh -i ~/.ssh/StitchWorksSoftware_dsa stitchw1@stitchworkssoftware.com'
 alias sshhome='ssh bcmilco.homelinux.org -p 2222'
+
+alias make='make -j4'
+alias sloccount='sloccount --effort 1 .7 --schedule 1 1'
+alias top='htop'
 
 HISTSIZE=5000
 PATH="~/bin:~/env.git/bin:$PATH"
@@ -28,7 +41,7 @@ EDITOR="/usr/bin/vim"
 function parse_git_output {
 
     first=$(git config --global color.ui false 2> /dev/null)
-    output=$(git status 2> /dev/null | ~/bin/git.awk 2> /dev/null) || return
+    output=$(git status 2> /dev/null | git.awk 2> /dev/null) || return
     first=$(git config --global color.ui true 2> /dev/null)
     echo -e "$output";
 }
