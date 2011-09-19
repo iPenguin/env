@@ -1,0 +1,12 @@
+host desktop
+    hostname 192.168.0.125
+    user brian
+host media-center
+    hostname 192.168.0.150
+    user brian
+host netbook
+    hostname 192.168.0.110
+    user brian
+host macbook
+    hostname 192.168.0.135
+    user brian
