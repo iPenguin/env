@@ -82,6 +82,8 @@ BEGIN {
     } else if(test == "# Your branch") {
         ahead = 1;
         next;
+    } else if(test == "# Not currently") {
+        branch = "detached HEAD";
     }
 
     fileName ="";
