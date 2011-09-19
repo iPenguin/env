@@ -22,7 +22,7 @@ alias git-desktop='git pull --all --tags'
 alias sshhome='ssh bcmilco.homelinux.org -p 2222'
 
 HISTSIZE=5000
-PATH="~/bin:$PATH:/usr/kde/unsermake"
+PATH="~/bin:~/env.git/bin:$PATH"
 EDITOR="/usr/bin/vim"
 
 function parse_git_output {
