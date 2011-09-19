@@ -156,24 +156,27 @@ END {
     cyan="\033[036m";
     light_cyan="\033[1;36m";
     blue="\033[34m";
-    light_blue="\033[1;34m";
+    bright_blue="\033[1;34m";
     white="\033[37m";
 
     if(isRepo == 1) {
+
+        printf bright_blue repo end_color;
+
         if(bareRepo == 1) {
-            branch = light_cyan " ⑆" cyan " bare repo " light_cyan "⑆";
+            branch = cyan " ⑆" light_cyan " bare repo " cyan "⑆";
         } else {
-            branch = light_cyan " ⑆ " end_color cyan branch " " end_color;
+            branch = cyan " ⑆ " end_color light_cyan branch " " end_color;
         }
 
-        printf blue repo branch;
+        printf branch;
 
         if(bareRepo != 1) {
             if(ahead == 1) {
                 printf bright_yellow "⬆ " end_color;
             }
 
-            printf light_cyan "⑆ " end_color;
+            printf cyan "⑆ " end_color;
 
             output = "";
             for(item in folders) {
