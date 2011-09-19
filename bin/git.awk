@@ -78,7 +78,6 @@ BEGIN {
     } else if(test == "no changes added") {
         next;
     } else if(test == "nothing to commit") {
-        noChanges = 1;
         next;
     } else if(test == "# Your branch") {
         ahead = 1;
@@ -149,6 +148,7 @@ END {
     red="\033[31m";
     bright_red="\033[1;31m";
     green="\033[32m";
+    bright_green="\033[1;32m";
     yellow="\033[33m";
     bright_yellow="\033[1;33m";
     violet="\033[35m";
@@ -161,40 +161,36 @@ END {
 
     if(isRepo == 1) {
         if(bareRepo == 1) {
-            branch = " ⑆ bare repo";
+            branch = light_cyan " ⑆" cyan " bare repo " light_cyan "⑆";
         } else {
-            branch = " ⑆ " branch " ";
+            branch = light_cyan " ⑆ " end_color cyan branch " " end_color;
         }
 
-        printf blue repo cyan branch end_color;
+        printf blue repo branch;
 
         if(bareRepo != 1) {
             if(ahead == 1) {
-                printf light_cyan "⬆ " end_color;
+                printf bright_yellow "⬆ " end_color;
             }
 
-            if(noChanges != 1) {
-                printf light_cyan "* " end_color;
-            }
-
-            printf cyan " ⑆ " end_color;
+            printf light_cyan "⑆ " end_color;
 
             output = "";
             for(item in folders) {
                 output = output item;
                 if(changes[item,"staged"] == 1)
-                    output = output "\033[1;32m*\033[0m";
+                    output = output bright_green "*" end_color;
                 if(changes[item,"unstaged"] == 1)
-                    output = output "\033[1;33m*\033[0m";
+                    output = output bright_yellow "*" end_color;
                 if(changes[item,"untracked"] == 1)
-                    output = output "\033[1;31m*\033[0m";
+                    output = output bright_red "*" end_color;
                 output = output " ";
             }
 
             if(output != "")
                 printf output;
             else
-                printf "no local changes";
+                printf end_color "no local changes";
         }
     }       
 }
