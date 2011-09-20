@@ -22,7 +22,7 @@ alias du='du -h'
 alias mv='mv -i'
 alias rm='rm -i'
 alias less='less -R'
-
+alias grep='grep --color'
 alias git-netbook='git pull --tags netbook working'
 alias git-desktop='git pull --all --tags'
 
