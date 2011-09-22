@@ -176,7 +176,7 @@ END {
 
         if(bareRepo != 1) {
             if(ahead == 1) {
-                printf bright_yellow "⬆ " end_color aheadCount " ";
+                printf cyan "⑆ " end_color bright_yellow "⬆ " end_color aheadCount " ";
             }
 
             output = "";
