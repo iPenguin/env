@@ -179,24 +179,35 @@ END {
                 printf bright_yellow "⬆ " end_color aheadCount " ";
             }
 
-            printf cyan "⑆ " end_color;
-
             output = "";
             for(item in folders) {
-                output = output item;
-                if(changes[item,"staged"] >= 1)
-                    output = output bright_green changes[item,"staged"] "*" end_color;
-                if(changes[item,"unstaged"] >= 1)
-                    output = output bright_yellow  changes[item,"unstaged"] "*" end_color;
-                if(changes[item,"untracked"] == 1)
-                    output = output bright_red changes[item,"untracked"] "*" end_color;
-                output = output " ";
+                output = output cyan " ⑆ " end_color item " (";
+                if(changes[item,"staged"] >= 1) {
+                    output = output bright_green changes[item,"staged"] end_color;
+                } else {
+                    output = output bright_green "-" end_color;
+                }
+                output = output "/";
+
+                if(changes[item,"unstaged"] >= 1) {
+                    output = output bright_yellow changes[item,"unstaged"] end_color;
+                } else {
+                    output = output bright_yellow "-" end_color;
+                }
+                output = output "/";
+
+                if(changes[item,"untracked"] >= 1) {
+                    output = output bright_red changes[item,"untracked"] end_color;
+                } else {
+                    output = output bright_red "-" end_color;
+                }
+                output = output ")";
             }
 
             if(output != "")
                 printf output;
             else
-                printf end_color "no local changes";
+                printf  cyan "⑆ " end_color "no local changes";
         }
     }       
 }
