@@ -80,6 +80,7 @@ BEGIN {
     } else if(test == "nothing to commit") {
         next;
     } else if(test == "# Your branch") {
+        aheadCount = $9;
         ahead = 1;
         next;
     } else if(test == "# Not currently") {
@@ -135,11 +136,11 @@ BEGIN {
     folders[folder] = 1;
 
     if(staged == 1)
-        changes[folder,"staged"] = 1;
+        changes[folder,"staged"] += 1;
     else if(staged == 0 && tracked == 1)
-        changes[folder,"unstaged"] = 1;
+        changes[folder,"unstaged"] += 1;
     else if(staged == 0 && tracked == 0)
-        changes[folder,"untracked"] = 1;
+        changes[folder,"untracked"] += 1;
 
 }
 END {
@@ -175,7 +176,7 @@ END {
 
         if(bareRepo != 1) {
             if(ahead == 1) {
-                printf bright_yellow "⬆ " end_color;
+                printf bright_yellow "⬆ " end_color aheadCount " ";
             }
 
             printf cyan "⑆ " end_color;
@@ -183,12 +184,12 @@ END {
             output = "";
             for(item in folders) {
                 output = output item;
-                if(changes[item,"staged"] == 1)
-                    output = output bright_green "*" end_color;
-                if(changes[item,"unstaged"] == 1)
-                    output = output bright_yellow "*" end_color;
+                if(changes[item,"staged"] >= 1)
+                    output = output bright_green changes[item,"staged"] "*" end_color;
+                if(changes[item,"unstaged"] >= 1)
+                    output = output bright_yellow  changes[item,"unstaged"] "*" end_color;
                 if(changes[item,"untracked"] == 1)
-                    output = output bright_red "*" end_color;
+                    output = output bright_red changes[item,"untracked"] "*" end_color;
                 output = output " ";
             }
 
