@@ -181,7 +181,7 @@ END {
 
             output = "";
             for(item in folders) {
-                output = output cyan " ⑆ " end_color item " (";
+                output = output cyan "⑆ " end_color item " (";
                 if(changes[item,"staged"] >= 1) {
                     output = output bright_green changes[item,"staged"] end_color;
                 } else {
