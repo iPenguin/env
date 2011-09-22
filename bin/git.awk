@@ -83,7 +83,7 @@ BEGIN {
         ahead = 1;
         next;
     } else if(test == "# Not currently") {
-        branch = "detached HEAD";
+        branch = "(no branch)";
     }
 
     fileName ="";
