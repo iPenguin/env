@@ -164,7 +164,7 @@ END {
 
     if(isRepo == 1) {
 
-        printf bright_blue repo end_color;
+        printf bright_red "#[ " bright_blue repo end_color;
 
         if(bareRepo == 1) {
             branch = cyan " ⑆" light_cyan " bare repo " cyan "⑆";
@@ -181,7 +181,7 @@ END {
 
             output = "";
             for(item in folders) {
-                output = output cyan "⑆ " end_color item " (";
+                output = output cyan "⑆ " end_color item "(";
                 if(changes[item,"staged"] >= 1) {
                     output = output bright_green changes[item,"staged"] end_color;
                 } else {
@@ -201,13 +201,13 @@ END {
                 } else {
                     output = output bright_red "-" end_color;
                 }
-                output = output ")";
+                output = output ") ";
             }
 
             if(output != "")
-                printf output;
+                printf output bright_red "]" end_color;
             else
-                printf  cyan "⑆ " end_color "no local changes";
+                printf  cyan "⑆ " end_color "no local changes" bright_red " ]" end_color;
         }
     }       
 }
