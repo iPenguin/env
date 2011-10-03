@@ -164,7 +164,7 @@ END {
 
     if(isRepo == 1) {
 
-        printf bright_red "#[ " bright_blue repo end_color;
+        printf bright_red "#--[ " bright_blue repo end_color;
 
         if(bareRepo == 1) {
             branch = cyan " ⑆" light_cyan " bare repo " cyan "⑆";
@@ -205,9 +205,9 @@ END {
             }
 
             if(output != "")
-                printf output bright_red "]" end_color;
+                printf output bright_red "]--≻" end_color;
             else
-                printf  cyan "⑆ " end_color "no local changes" bright_red " ]" end_color;
+                printf  cyan "⑆ " end_color "no local changes" bright_red " ]--≻" end_color;
         }
     }       
 }
