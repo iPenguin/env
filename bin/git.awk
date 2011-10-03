@@ -38,8 +38,12 @@ BEGIN {
         repoPath = repoPath "/" pwd[i];
         output = cmd("/bin/ls -d " repoPath "/.git 2> /dev/null");
 
-        if(output == repoPath"/.git") {
-            bareTest = cmd("cat " repoPath "/.git/config | grep \"bare\" 2> /dev/null");
+        
+        if(output == repoPath"/.git")
+            repoPath = repoPath"/.git";
+
+        if(match(repoPath, "\\.git")) {
+            bareTest = cmd("cat " repoPath "/config | grep \"bare\" 2> /dev/null");
             if(bareTest ~ "true")
                 bareRepo = 1;
 
@@ -145,9 +149,10 @@ BEGIN {
 }
 END {
     #colors:
-    
     end_color="\033[0m";
     black="\033[30m";
+    light_gray="\033[00;37m";
+    dark_gray="\033[01;30m";
     red="\033[31m";
     bright_red="\033[1;31m";
     green="\033[32m";
@@ -157,7 +162,7 @@ END {
     violet="\033[35m";
     bright_violet="\033[1;35m";
     cyan="\033[036m";
-    light_cyan="\033[1;36m";
+    bright_cyan="\033[1;36m";
     blue="\033[34m";
     bright_blue="\033[1;34m";
     white="\033[37m";
@@ -166,22 +171,24 @@ END {
 
         printf bright_red "#--[ " bright_blue repo end_color;
 
+        branchOutput = dark_gray " ⑆ ";
+
         if(bareRepo == 1) {
-            branch = cyan " ⑆" light_cyan " bare repo " cyan "⑆";
+            branchOutput = branchOutput bright_cyan "(bare repository)";
         } else {
-            branch = cyan " ⑆ " end_color light_cyan branch " " end_color;
+            branchOutput = branchOutput bright_cyan branch;
         }
 
-        printf branch;
+        printf branchOutput dark_gray " ⑆ " end_color;
 
         if(bareRepo != 1) {
             if(ahead == 1) {
-                printf cyan "⑆ " end_color bright_yellow "⬆ " end_color aheadCount " ";
+                printf bright_yellow "⬆ " end_color aheadCount dark_gray " ⑆ " end_color;
             }
 
             output = "";
             for(item in folders) {
-                output = output cyan "⑆ " end_color item "(";
+                output = output item "(";
                 if(changes[item,"staged"] >= 1) {
                     output = output bright_green changes[item,"staged"] end_color;
                 } else {
@@ -205,9 +212,13 @@ END {
             }
 
             if(output != "")
-                printf output bright_red "]--≻" end_color;
+                printf output;
             else
-                printf  cyan "⑆ " end_color "no local changes" bright_red " ]--≻" end_color;
+                printf "no local changes ";
+        } else {
+            printf "no working branch ";
         }
+
+        printf bright_red "]--≻" end_color;
     }       
 }

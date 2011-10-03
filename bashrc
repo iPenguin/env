@@ -46,21 +46,33 @@ function parse_git_output {
     echo -e "$output";
 }
 
-GREEN="\[\033[00;32m\]"
-BRIGHT_GREEN="\[\033[01;32m\]"
-BLUE="\[\033[01;34m\]"
-CYAN="\[\033[01;36m\]"
-YELLOW="\[\033[00;33m\]"
-BRIGHT_YELLOW="\[\033[01;33m\]"
-BRIGHT_RED="\[\033[01;31m\]"
-BRIGHT_BLACK="\[\033[01;30m\]"
-WHITE="\[\033[01;37m\]"
+
+BLACK="\[\e[00;30m\]"
+LIGHT_GRAY="\[\e[00;37m\]"
+DARY_GRAY="\[\e[01;30m\]"
+BROWN="\[\e[00;33m\]"
+PURPLE="\[\e[00;35m\]"
+LIGHT_PURPLE="\[\e[01;35m\]"
+
+GREEN="\[\e[00;32m\]"
+BRIGHT_GREEN="\[\e[01;32m\]"
+BLUE="\[\e[00;34m\]"
+BRIGHT_BLUE="\[\e[01;34m\]"
+CYAN="\[\e[00;36m\]"
+BRIGHT_CYAN="\[\e[01;36m\]"
+YELLOW="\[\e[00;33m\]"
+BRIGHT_YELLOW="\[\e[01;33m\]"
+RED="\[\e[00;31m\]"
+BRIGHT_RED="\[\e[01;31m\]"
+WHITE="\[\e[01;37m\]"
 ENDCOLOR="\e[m"
 
+
 if [ "$SSH_CONNECTION" == "" ]; then
-    PS1="\$(parse_git_output)\n:${BRIGHT_RED} [ \! \# \t \W ${GREEN}\h ${BLUE}\w${BRIGHT_RED} ]$ENDCOLOR \$; "
+    PS1="\$(parse_git_output)\\n${BRIGHT_RED}#--[ ${YELLOW}\\! ${DARY_GRAY}⑆ ${GREEN}\\h ${DARY_GRAY}⑆ ${BRIGHT_BLUE}\\w${BRIGHT_RED} ]\\$ --≻${ENDCOLOR}\\n"
+
 else
-    PS1="\$(parse_git_output)\n${BRIGHT_RED}#[ ${YELLOW}\h ${BLUE}\w${BRIGHT_RED} ]≻$ENDCOLOR "
+    PS1="\$(parse_git_output)\\n${BRIGHT_RED}#--[ ${YELLOW}\\! ${DARY_GRAY}⑆ ${BRIGHT_YELLOW}\\h ${DARY_GRAY}⑆ ${BRIGHT_BLUE}\\w${BRIGHT_RED} ]\\$ --≻${ENDCOLOR}\\n"
 fi
 
 export PATH EDITOR HISTSIZE
