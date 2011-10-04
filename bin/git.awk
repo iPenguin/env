@@ -1,18 +1,29 @@
 #!/usr/bin/awk -f
 #
-# (c) 2011 Stitch Works Software
-# Brian C. Milco <brian@stitchworkssoftware.com>
+# (c) 2011 Brian C. Milco
 #
 # This script parses the output of git status and figures out
-# which base folders in the repo have modified files.
+# which top level folders in the repository have modified files.
 #
-# Sample output for a git repo at ~/program.git:
+# Sample output for a git repo at ~/env.git:
 #
-# program.git: . src docs tests src src
+# #--[ env.git ⑆ master ⑆ no local changes ]--≻
 #
-# the output is colorized and src is in the list 3 times because
-# it's contains staged changes, unstaged changes, and untracked changes.
+# #--[ env.git ⑆ master ⑆ ⬆ 5 ⑆ ⬇ 2 ⑆ bin(-/1/1) ]--≻
 #
+# What the output means:
+# The line starts with a hash making the output a comment.
+# the information that can be inside the braces is as follows:
+# the repository (folder) name
+# the branch name - or (no branch) or (bare repository)
+# If there are changes the following maybe displayed as needed:
+# ⬆ [number] - how many commits on this branch not in the remote branch. You need to push changes to remote.
+# ⬇ [number] - how many commits on the remote branch not in this branch. You need to pull changes from remote.
+# [folderName](1/2/3) - a list of directories that contain changes. The change count is listed in parentheses and mean the following:
+# the first number is the number of staged changes. (green)
+# the second number is the number of unstaged changes. (yellow)
+# the third number is the number of untracked changes. (red)
+# 
 
 function cmd( c )
 {
@@ -23,11 +34,6 @@ function cmd( c )
 }
 
 BEGIN {
-    skip = 0;
-    ahead = 0;
-    staged = 1;
-    tracked = 1;
-
     curPath = cmd("pwd");
 
     pwdCount = split(curPath, pwd, "/");
@@ -54,6 +60,7 @@ BEGIN {
     }
 }
 {
+    #only process lines that have data.
     if(skip > 0) {
         skip--;
         next;
@@ -86,12 +93,14 @@ BEGIN {
     } else if(test == "# Your branch") {
 
         if($5 == "ahead") {
-            aheadCount = $9;
-            ahead = 1;
+            ahead = $9;
         } else if($5 == "behind") {
-            behindCount = $8;
-            behind = 1;
-        }
+            behind = $8;
+        }         
+        next;
+    } else if(test == "# and have") { #diverged line 2
+        ahead = $4;
+        behind = $6;
         next;
     } else if(test == "# Not currently") {
         branch = "(no branch)";
@@ -188,11 +197,11 @@ END {
         printf branchOutput dark_gray " ⑆ " end_color;
 
         if(bareRepo != 1) {
-            if(ahead == 1) {
-                printf bright_yellow "⬆ " end_color aheadCount dark_gray " ⑆ " end_color;
+            if(ahead > 0) {
+                printf bright_yellow "⬆ " end_color ahead dark_gray " ⑆ " end_color;
             } 
-            if (behind == 1) {
-                printf bright_yellow "⬇ " end_color behindCount dark_gray " ⑆ " end_color;
+            if (behind > 0) {
+                printf bright_yellow "⬇ " end_color behind dark_gray " ⑆ " end_color;
             }
 
             output = "";
