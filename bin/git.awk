@@ -84,8 +84,14 @@ BEGIN {
     } else if(test == "nothing to commit") {
         next;
     } else if(test == "# Your branch") {
-        aheadCount = $9;
-        ahead = 1;
+
+        if($5 == "ahead") {
+            aheadCount = $9;
+            ahead = 1;
+        } else if($5 == "behind") {
+            behindCount = $8;
+            behind = 1;
+        }
         next;
     } else if(test == "# Not currently") {
         branch = "(no branch)";
@@ -184,6 +190,9 @@ END {
         if(bareRepo != 1) {
             if(ahead == 1) {
                 printf bright_yellow "⬆ " end_color aheadCount dark_gray " ⑆ " end_color;
+            } 
+            if (behind == 1) {
+                printf bright_yellow "⬇ " end_color behindCount dark_gray " ⑆ " end_color;
             }
 
             output = "";
