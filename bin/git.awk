@@ -7,14 +7,12 @@
 #
 # Sample output for a git repo at ~/env.git:
 #
-# #--[ env.git ⑆ master ⑆ no local changes ]--≻
+# ⑆ master ⑆ no local changes 
 #
-# #--[ env.git ⑆ master ⑆ ⬆ 5 ⑆ ⬇ 2 ⑆ (-/1/1) ]--≻
+# ⑆ master ⑆ ⬆ 5 ⑆ ⬇ 2 ⑆ bin(-/1/1) 
 #
 # What the output means:
-# The line starts with a hash making the output a comment.
 # the information that can be inside the braces is as follows:
-# the repository (folder) name
 # the branch name - or (no branch) or (bare repository)
 # If there are changes the following maybe displayed as needed:
 # ⬆ [number] - how many commits on this branch not in the remote branch. You need to push changes to remote.
