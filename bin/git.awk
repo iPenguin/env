@@ -3,9 +3,9 @@
 # (c) 2011 Brian C. Milco
 #
 # This script parses the output of git status and figures out
-# which top level folders in the repository have modified files.
+# which top level folders in the repository have modified files. If any has more.
 #
-# Sample output for a git repo at ~/env.git:
+# Sample output for a repository:
 #
 # ⑆ master ⑆ no local changes 
 #
