@@ -69,10 +69,10 @@ ENDCOLOR="\e[m"
 
 
 if [ "$SSH_CONNECTION" == "" ]; then
-    PS1="\$(parse_git_output)\\n${BRIGHT_RED}#--[ ${YELLOW}\\! ${DARY_GRAY}⑆ ${GREEN}\\h ${DARY_GRAY}⑆ ${BRIGHT_BLUE}\\w${BRIGHT_RED} ]\\$ --≻${ENDCOLOR}\\n"
+    PS1="${BRIGHT_RED}#--[ ${YELLOW}\\! ${DARY_GRAY}⑆ ${GREEN}\\h ${DARY_GRAY}⑆ ${BRIGHT_BLUE}\\w \$(parse_git_output)${BRIGHT_RED}]\\$ --≻${ENDCOLOR}\\n"
 
 else
-    PS1="\$(parse_git_output)\\n${BRIGHT_RED}#--[ ${YELLOW}\\! ${DARY_GRAY}⑆ ${BRIGHT_YELLOW}\\h ${DARY_GRAY}⑆ ${BRIGHT_BLUE}\\w${BRIGHT_RED} ]\\$ --≻${ENDCOLOR}\\n"
+    PS1="${BRIGHT_RED}#--[ ${YELLOW}\\! ${DARY_GRAY}⑆ ${YELLOW}\\h ${DARY_GRAY}⑆ ${BRIGHT_BLUE}\\w \$(parse_git_output)${BRIGHT_RED}]\\$ --≻${ENDCOLOR}\\n"
 fi
 
 export PATH EDITOR HISTSIZE

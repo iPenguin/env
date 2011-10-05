@@ -34,29 +34,18 @@ function cmd( c )
 }
 
 BEGIN {
-    curPath = cmd("pwd");
 
-    pwdCount = split(curPath, pwd, "/");
-    repoPath = "";
-    repo = "";
     isRepo = 0;
-    for(i = 2; i <= pwdCount; i++) {
-        repoPath = repoPath "/" pwd[i];
-        output = cmd("/bin/ls -d " repoPath "/.git 2> /dev/null");
 
-        
-        if(output == repoPath"/.git")
-            repoPath = repoPath"/.git";
+    output = cmd("git rev-parse --git-dir 2> /dev/null");
 
-        if(match(repoPath, "\\.git")) {
-            bareTest = cmd("cat " repoPath "/config | grep \"bare\" 2> /dev/null");
-            if(bareTest ~ "true")
-                bareRepo = 1;
+    if(output) {
 
-            isRepo = 1;
-            repo = pwd[i];
-            break;
-        }
+        bareTest = cmd("cat " output "/config | grep \"bare\" 2> /dev/null");
+        if(bareTest ~ "true")
+            bareRepo = 1;
+
+        isRepo = 1;
     }
 }
 {
@@ -132,34 +121,12 @@ BEGIN {
         fileName = substr($0, 2);
     }
 
-    count = split(fileName,path,"/");
-
-    folder = "";
-
-    if(count == 1) {
-        folder = ".";
-    } else if(count > 1) {
-        for(i = 1; i <= count; i++) {
-            if(path[i] == ".." && (count - i) > 1)
-                continue;
-            else {
-                if(path[i] == "..")
-                    folder = ".";
-                else
-                    folder = path[i];
-                break;
-            }
-        }
-    }
-
-    folders[folder] = 1;
-
     if(staged == 1)
-        changes[folder,"staged"] += 1;
+        changes["staged"] += 1;
     else if(staged == 0 && tracked == 1)
-        changes[folder,"unstaged"] += 1;
+        changes["unstaged"] += 1;
     else if(staged == 0 && tracked == 0)
-        changes[folder,"untracked"] += 1;
+        changes["untracked"] += 1;
 
 }
 END {
@@ -184,9 +151,7 @@ END {
 
     if(isRepo == 1) {
 
-        printf bright_red "#--[ " bright_blue repo end_color;
-
-        branchOutput = dark_gray " ⑆ ";
+        branchOutput = bright_red "⑆ ";
 
         if(bareRepo == 1) {
             branchOutput = branchOutput bright_cyan "(bare repository)";
@@ -204,39 +169,39 @@ END {
                 printf bright_yellow "⬇ " end_color behind dark_gray " ⑆ " end_color;
             }
 
-            output = "";
-            for(item in folders) {
-                output = output item "(";
-                if(changes[item,"staged"] >= 1) {
-                    output = output bright_green changes[item,"staged"] end_color;
+            #if there are changes show the output.
+            if(changes["staged"] > 0 || changes["unstaged"] > 0 || changes["untracked"] > 0) {
+                output = "(";
+
+                if(changes["staged"] >= 1) {
+                    output = output bright_green changes["staged"] end_color;
                 } else {
                     output = output bright_green "-" end_color;
                 }
+
                 output = output "/";
 
-                if(changes[item,"unstaged"] >= 1) {
-                    output = output bright_yellow changes[item,"unstaged"] end_color;
+                if(changes["unstaged"] >= 1) {
+                    output = output bright_yellow changes["unstaged"] end_color;
                 } else {
                     output = output bright_yellow "-" end_color;
                 }
                 output = output "/";
 
-                if(changes[item,"untracked"] >= 1) {
-                    output = output bright_red changes[item,"untracked"] end_color;
+                if(changes["untracked"] >= 1) {
+                    output = output bright_red changes["untracked"] end_color;
                 } else {
                     output = output bright_red "-" end_color;
                 }
-                output = output ") ";
-            }
 
-            if(output != "")
-                printf output;
-            else
+                printf output ") ";
+            } else {
                 printf "no local changes ";
+            }   
         } else {
             printf "no working branch ";
         }
 
-        printf bright_red "]--≻" end_color;
+        printf end_color;
     }       
 }
