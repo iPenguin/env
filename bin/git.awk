@@ -17,7 +17,7 @@
 # If there are changes the following maybe displayed as needed:
 # ⬆ [number] - how many commits on this branch not in the remote branch. You need to push changes to remote.
 # ⬇ [number] - how many commits on the remote branch not in this branch. You need to pull changes from remote.
-# (1/2/3) - The count of changes in the repository. Numbers mean the following:
+# (2/1/2/3) - The count of changes in the repository. Numbers mean the following:
 # the first number is the number of staged changes. (green)
 # the second number is the number of unstaged changes. (yellow)
 # the third number is the number of untracked changes. (red)
