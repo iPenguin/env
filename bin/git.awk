@@ -102,37 +102,10 @@ BEGIN {
         branch = "(no branch)";
     }
 
-    fileName ="";
-    if($2 ~ ".*modified:") {
-        $1 = "";
-        $2 = "";
-        fileName = substr($0, 3);
-    } else if($2 " " $3 ~ ".*new file:") {
-        $1 = "";
-        $2 = "";
-        $3 = "";
-        fileName = substr($0, 4);
-    } else if($2 ~ ".*deleted:") {
-        $1 = "";
-        $2 = "";
-        fileName = substr($0, 3);
-    } else if($2 ~ ".*renamed:") {
-        $1 = "";
-        $2 = "";
-        idx = index($0, "->");
-        fileName = substr($0, 3, idx);
-    } else if($2 " " $3 ~ ".*both modified:") {
-        $1 = "";
-        $2 = "";
-        $3 = "";
-        fileName = substr($0, 4);
-    } else {
-        $1 = "";
-        if($0 == "")
-            next;
-        fileName = substr($0, 2);
-    }
-
+    #Don't count blank lines
+    if($0 == "#")
+        next;
+    
     if(staged == 1)
         changes["staged"] += 1;
     else if(staged == 0 && tracked == 1 && merged == 1)
