@@ -127,7 +127,6 @@ BEGIN {
         changes["unstaged"] += 1;
     else if(staged == 0 && tracked == 0)
         changes["untracked"] += 1;
-
 }
 END {
     #colors:
