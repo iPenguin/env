@@ -2,8 +2,8 @@
 #
 # (c) 2011 Brian C. Milco
 #
-# This script parses the output of git status and figures out
-# which top level folders in the repository have modified files. If any has more.
+# This script parses the output of git status and displays the
+# information in one line that can be used in a command line. 
 #
 # Sample output for a repository:
 #
