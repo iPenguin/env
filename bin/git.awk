@@ -62,16 +62,25 @@ BEGIN {
         skip = 2;
         staged = 1;
         tracked = 1;
+        merged = 1;
         next;
     } else if(test == "# Changes not") {
         skip = 3;
         staged = 0;
         tracked = 1;
+        merged = 1;
         next;
     } else if(test == "# Untracked files:") {
         skip = 2;
         staged = 0;
         tracked = 0;
+        merged = 1;
+        next;
+    } else if(test == "# Unmerged paths:") {
+        skip = 2;
+        staged = 0;
+        tracked = 1;
+        merged = 0;
         next;
     } else if(test == "no changes added") {
         next;
@@ -112,6 +121,11 @@ BEGIN {
         $2 = "";
         idx = index($0, "->");
         fileName = substr($0, 3, idx);
+    } else if($2 " " $3 ~ ".*both modified:") {
+        $1 = "";
+        $2 = "";
+        $3 = "";
+        fileName = substr($0, 4);
     } else {
         $1 = "";
         if($0 == "")
@@ -121,10 +135,13 @@ BEGIN {
 
     if(staged == 1)
         changes["staged"] += 1;
-    else if(staged == 0 && tracked == 1)
+    else if(staged == 0 && tracked == 1 && merged == 1)
         changes["unstaged"] += 1;
-    else if(staged == 0 && tracked == 0)
+    else if(tracked == 0)
         changes["untracked"] += 1;
+    else if(merged == 0)
+        changes["unmerged"] += 1;
+
 }
 END {
     #colors:
@@ -171,24 +188,31 @@ END {
                 output = "(";
 
                 if(changes["staged"] >= 1) {
-                    output = output bright_green changes["staged"] end_color;
+                    output = output bright_green changes["staged"];
                 } else {
-                    output = output bright_green "-" end_color;
+                    output = output bright_green "-";
                 }
 
-                output = output "/";
+                output = output end_color "/";
 
                 if(changes["unstaged"] >= 1) {
-                    output = output bright_yellow changes["unstaged"] end_color;
+                    output = output bright_yellow changes["unstaged"];
                 } else {
-                    output = output bright_yellow "-" end_color;
+                    output = output bright_yellow "-";
                 }
-                output = output "/";
+                output = output end_color "/";
+
+                if(changes["unmerged"] >= 1) {
+                    output = output violet changes["unmerged"];
+                } else {
+                    output = output violet "-";
+                }
+                output = output end_color "/";
 
                 if(changes["untracked"] >= 1) {
-                    output = output bright_red changes["untracked"] end_color;
+                    output = output bright_red changes["untracked"];
                 } else {
-                    output = output bright_red "-" end_color;
+                    output = output bright_red "-";
                 }
 
                 printf output ") ";
