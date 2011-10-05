@@ -9,7 +9,7 @@
 #
 # ⑆ master ⑆ no local changes 
 #
-# ⑆ master ⑆ ⬆ 5 ⑆ ⬇ 2 ⑆ bin(-/1/1) 
+# ⑆ master ⑆ ⬆ 5 ⑆ ⬇ 2 ⑆ (1/2/3/4) 
 #
 # What the output means:
 # the information that can be inside the braces is as follows:
@@ -17,10 +17,11 @@
 # If there are changes the following maybe displayed as needed:
 # ⬆ [number] - how many commits on this branch not in the remote branch. You need to push changes to remote.
 # ⬇ [number] - how many commits on the remote branch not in this branch. You need to pull changes from remote.
-# (1/2/3) - The count of changes in the repository. Numbers mean the following:
-# the first number is the number of staged changes. (green)
-# the second number is the number of unstaged changes. (yellow)
-# the third number is the number of untracked changes. (red)
+# (1/2/3/4) - The count of changes in the repository:
+# 1 - the number of staged changes. (green)
+# 2 - the number of unstaged changes. (yellow)
+# 3 - the number of unmerged changes. (violet)
+# 4 - the number of untracked changes. (red)
 # 
 
 function cmd( c )
