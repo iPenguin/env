@@ -5,7 +5,7 @@
 # This script parses the output of git status and displays the
 # information in one line that can be used in a command line. 
 #
-# Sample output for a git repo at ~/env.git:
+# Sample output for a repository:
 #
 # ⑆ master ⑆ no local changes 
 #
@@ -60,7 +60,7 @@ BEGIN {
         branch = $4;
         next;
     } else if(test == "# Changes to") {
-        skip = 2;
+        skip = 1;
         staged = 1;
         tracked = 1;
         merged = 1;
@@ -83,9 +83,7 @@ BEGIN {
         tracked = 1;
         merged = 0;
         next;
-    } else if(test == "no changes added") {
-        next;
-    } else if(test == "nothing to commit") {
+    } else if($1 != "#") {
         next;
     } else if(test == "# Your branch") {
 
@@ -158,7 +156,7 @@ END {
             }
 
             #if there are changes show the output.
-            if(changes["staged"] > 0 || changes["unstaged"] > 0 || changes["untracked"] > 0) {
+            if(changes["staged"] > 0 || changes["unstaged"] > 0 || changes["untracked"] > 0 || changes["unmerged"] > 0) {
                 output = "(";
 
                 if(changes["staged"] >= 1) {
