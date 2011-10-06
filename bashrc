@@ -44,24 +44,21 @@ function parse_git_output {
     echo -e "$output";
 }
 
-
 BLACK="\[\e[00;30m\]"
-LIGHT_GRAY="\[\e[00;37m\]"
 DARY_GRAY="\[\e[01;30m\]"
-BROWN="\[\e[00;33m\]"
-PURPLE="\[\e[00;35m\]"
-LIGHT_PURPLE="\[\e[01;35m\]"
-
-GREEN="\[\e[00;32m\]"
-BRIGHT_GREEN="\[\e[01;32m\]"
-BLUE="\[\e[00;34m\]"
-BRIGHT_BLUE="\[\e[01;34m\]"
-CYAN="\[\e[00;36m\]"
-BRIGHT_CYAN="\[\e[01;36m\]"
-YELLOW="\[\e[00;33m\]"
-BRIGHT_YELLOW="\[\e[01;33m\]"
 RED="\[\e[00;31m\]"
 BRIGHT_RED="\[\e[01;31m\]"
+GREEN="\[\e[00;32m\]"
+BRIGHT_GREEN="\[\e[01;32m\]"
+BROWN="\[\e[00;33m\]"
+YELLOW="\[\e[01;33m\]"
+BLUE="\[\e[00;34m\]"
+BRIGHT_BLUE="\[\e[01;34m\]"
+PURPLE="\[\e[00;35m\]"
+LIGHT_PURPLE="\[\e[01;35m\]"
+CYAN="\[\e[00;36m\]"
+BRIGHT_CYAN="\[\e[01;36m\]"
+LIGHT_GRAY="\[\e[00;37m\]"
 WHITE="\[\e[01;37m\]"
 ENDCOLOR="\e[m"
 
