@@ -198,7 +198,7 @@ END {
             }  
             
             if(stashCount > 0) {
-                printf dark_gray "⑆ " yellow "{" end_color stashCount yellow "} " end_color;
+                printf dark_gray "⑆ " end_color bright_yellow "{" end_color stashCount bright_yellow "} " end_color;
             }
         } else {
             printf "no working branch ";
