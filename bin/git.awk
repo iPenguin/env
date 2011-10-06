@@ -43,7 +43,10 @@ BEGIN {
         bareTest = cmd("cat " output "/config | grep \"bare\" 2> /dev/null");
         if(bareTest ~ "true")
             bareRepo = 1;
-
+        
+        stashCount = cmd("git stash list | wc -l 2> /dev/null"); 
+        gsub(/ /,"",stashCount);
+        
         isRepo = 1;
     }
 }
@@ -192,7 +195,11 @@ END {
                 printf output end_color ") ";
             } else {
                 printf "no local changes ";
-            }   
+            }  
+            
+            if(stashCount > 0) {
+                printf dark_gray "⑆ " yellow "{" end_color stashCount yellow "} " end_color;
+            }
         } else {
             printf "no working branch ";
         }
