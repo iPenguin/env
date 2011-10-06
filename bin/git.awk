@@ -85,6 +85,8 @@ BEGIN {
         next;
     } else if($1 != "#") {
         next;
+    } else if(test == "# Initial commit") {
+        next;
     } else if(test == "# Your branch") {
 
         if($5 == "ahead") {
