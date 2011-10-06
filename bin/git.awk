@@ -189,7 +189,7 @@ END {
                     output = output bright_red "-";
                 }
 
-                printf output ") ";
+                printf output end_color ") ";
             } else {
                 printf "no local changes ";
             }   
