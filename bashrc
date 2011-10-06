@@ -40,9 +40,7 @@ EDITOR="/usr/bin/vim"
 
 function parse_git_output {
 
-    first=$(git config --global color.ui false 2> /dev/null)
     output=$(git status 2> /dev/null | git.awk 2> /dev/null) || return
-    first=$(git config --global color.ui true 2> /dev/null)
     echo -e "$output";
 }
 
