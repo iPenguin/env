@@ -26,6 +26,12 @@ alias grep='grep --color'
 alias git-netbook='git pull --tags netbook working'
 alias git-desktop='git pull --all --tags'
 
+alias add='git add'
+alias status='git status'
+alias tag='git tag'
+alias gd='git diff'
+alias ver='get describe'
+
 alias sftpsws='sftp -i ~/.ssh/StitchWorksSoftware_dsa stitchw1@stitchworkssoftware.com'
 alias sshsws='ssh -i ~/.ssh/StitchWorksSoftware_dsa stitchw1@stitchworkssoftware.com'
 alias sshhome='ssh bcmilco.homelinux.org -p 2222'
