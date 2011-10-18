@@ -32,6 +32,8 @@ alias tag='git tag'
 alias gd='git diff'
 alias ver='git describe'
 alias commit='git commit'
+alias push='git push'
+alias pull='git pull'
 
 alias sftpsws='sftp -i ~/.ssh/StitchWorksSoftware_dsa stitchw1@stitchworkssoftware.com'
 alias sshsws='ssh -i ~/.ssh/StitchWorksSoftware_dsa stitchw1@stitchworkssoftware.com'
