@@ -32,6 +32,14 @@ function cmd( c )
 }
 
 BEGIN {
+    
+    if(seperator == "") {
+        seperator = "⑆";
+    }
+
+    if(subSeperator =="") {
+        subSeperator = "∙";
+    }
 
     isRepo = 0;
 
@@ -48,6 +56,12 @@ BEGIN {
         
         isRepo = 1;
     }
+
+    changes["staged"] = 0;
+    changes["unstaged"] = 0;
+    changes["untracked"] = 0;
+    changes["unmerged"] = 0;
+
 }
 {
     #only process lines that have data.
@@ -108,7 +122,7 @@ BEGIN {
     #Don't count blank lines
     if($0 == "#")
         next;
-    
+
     if(staged == 1)
         changes["staged"] += 1;
     else if(staged == 0 && tracked == 1 && merged == 1)
@@ -139,9 +153,10 @@ END {
     light_gray="\033[00;37m";
     end_color="\033[0m";
 
+    output = "";
     if(isRepo == 1) {
 
-        branchOutput = bright_red "⑆ ";
+        branchOutput = dark_gray seperator " ";
 
         if(bareRepo == 1) {
             branchOutput = branchOutput bright_cyan "(bare repository)";
@@ -149,60 +164,47 @@ END {
             branchOutput = branchOutput bright_cyan branch;
         }
 
-        printf branchOutput dark_gray " ⑆ " end_color;
+        output = output branchOutput dark_gray " " seperator " " end_color;
 
         if(bareRepo != 1) {
-            if(ahead > 0) {
-                printf bright_yellow "⬆ " end_color ahead dark_gray " ⑆ " end_color;
-            } 
-            if (behind > 0) {
-                printf bright_yellow "⬇ " end_color behind dark_gray " ⑆ " end_color;
+
+            if(ahead > 0 || behind > 0) {
+                if(ahead > 0) {
+                    output = output bright_yellow "⬆ " end_color ahead dark_gray;
+                } 
+                if (behind > 0) {
+                    output = output bright_yellow "⬇ " end_color behind dark_gray;
+                }
+
+                output = output " " seperator " ";
             }
 
             #if there are changes show the output.
             if(changes["staged"] > 0 || changes["unstaged"] > 0 || changes["untracked"] > 0 || changes["unmerged"] > 0) {
-                output = "(";
 
-                if(changes["staged"] >= 1) {
-                    output = output bright_green changes["staged"];
-                } else {
-                    output = output bright_green "-";
-                }
+                output = output bright_green changes["staged"];
+                output = output end_color subSeperator;
 
-                output = output end_color "/";
+                output = output bright_yellow changes["unstaged"];
+                output = output end_color subSeperator;
 
-                if(changes["unstaged"] >= 1) {
-                    output = output bright_yellow changes["unstaged"];
-                } else {
-                    output = output bright_yellow "-";
-                }
-                output = output end_color "/";
+                output = output violet changes["unmerged"];
+                output = output end_color subSeperator;
 
-                if(changes["unmerged"] >= 1) {
-                    output = output violet changes["unmerged"];
-                } else {
-                    output = output violet "-";
-                }
-                output = output end_color "/";
+                output = output bright_red changes["untracked"];
+                output = output " ";
 
-                if(changes["untracked"] >= 1) {
-                    output = output bright_red changes["untracked"];
-                } else {
-                    output = output bright_red "-";
-                }
-
-                printf output end_color ") ";
             } else {
-                printf "no local changes ";
+                output = output "no changes ";
             }  
             
             if(stashCount > 0) {
-                printf dark_gray "⑆ " end_color bright_yellow "{" end_color stashCount bright_yellow "} " end_color;
+                output = output dark_gray seperator end_color bright_yellow stashCount end_color;
             }
         } else {
-            printf "no working branch ";
+            output = output  "no branch ";
         }
 
-        printf end_color;
+        printf output end_color;
     }       
 }
