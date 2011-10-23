@@ -170,13 +170,13 @@ END {
 
             if(ahead > 0 || behind > 0) {
                 if(ahead > 0) {
-                    output = output bright_yellow "⬆ " end_color ahead dark_gray;
+                    output = output bright_yellow "⬆ " end_color ahead;
                 } 
                 if (behind > 0) {
-                    output = output bright_yellow "⬇ " end_color behind dark_gray;
+                    output = output bright_yellow "⬇ " end_color behind;
                 }
 
-                output = output " " seperator " ";
+                output = output dark_gray " " seperator " " end_color;
             }
 
             #if there are changes show the output.
