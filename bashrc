@@ -43,9 +43,9 @@ alias make='make -j4'
 alias sloccount='sloccount --effort 1 .7 --schedule 1 1'
 alias top='htop'
 
-# ∙ ❨ ❩ ⬆ ⬇ ⑈ ⑉ ǁ ║ ⑆ ⑇ ⟅ ⟆ ⬅ ➤ ➥ ➦ ➡ 
-SEPERATOR="ǁ"
-SUBSEPERATOR="∙"
+# ⚫ ❨ ❩ ⬆ ⬇ ⑈ ⑉ ǁ ║ ⑆ ⑇ ⟅ ⟆ ⬅ ➤ ➥ ➦ ➡
+SEPARATOR="ǁ"
+SEPARATOR2="⚫"
 
 HISTSIZE=5000
 PATH="~/bin:~/env.git/bin:$PATH"
@@ -53,7 +53,7 @@ EDITOR="/usr/bin/vim"
 
 function parse_git_output {
 
-    output=$(git status 2> /dev/null | git.awk -v seperator=$SEPERATOR subSeperator=$SUBSEPERATOR 2> /dev/null) || return
+    output=$(git status 2> /dev/null | git.awk -v separator=$SEPARATOR separator2=$SEPARATOR2 2> /dev/null) || return
     echo -e "$output";
 }
 
@@ -77,10 +77,9 @@ ENDCOLOR="\e[m"
 
 
 if [ "$SSH_CONNECTION" == "" ]; then
-    PS1="${BRIGHT_RED}#--[ ${GREEN}\h ${DARY_GRAY}${SEPERATOR} ${BRIGHT_BLUE}\w \$(parse_git_output)${BRIGHT_RED}]\\$ --≻${ENDCOLOR}\n"
-
+    PS1="${BRIGHT_RED}#--[ ${GREEN}\h ${DARY_GRAY}${SEPARATOR} ${BRIGHT_BLUE}\w \$(parse_git_output)${BRIGHT_RED}]\\$ --≻${ENDCOLOR}\n"
 else
-    PS1="${BRIGHT_RED}#--[ ${YELLOW}\h ${DARY_GRAY}${SEPERATOR} ${BRIGHT_BLUE}\w \$(parse_git_output)${BRIGHT_RED}]\\$ --≻${ENDCOLOR}\n"
+    PS1="${BRIGHT_RED}#--[ ${YELLOW}\h ${DARY_GRAY}${SEPARATOR} ${BRIGHT_BLUE}\w \$(parse_git_output)${BRIGHT_RED}]\\$ --≻${ENDCOLOR}\n"
 fi
 
 export PATH EDITOR HISTSIZE

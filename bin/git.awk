@@ -5,22 +5,24 @@
 # This script parses the output of several git commands and presents the
 # information in one line that can be added to a command prompt (PS1).
 #
+# If you use -v separator="|" separator2="/" when calling this script you can use other field separators.
+#
 # Sample output:
 #
-# ⑆ master ⑆ ⬆ 1 ⑆ ⬇ 1 ⑆ (1/2/3/4) ⑆ {1}
+# | master | ⬆ 1 ⬇ 1 | 1/2/3/4 |1
 #
 # What the output means:
 #
-# ⑆ - field seperator
+# | - field separator
 # master - the branch name or (no branch) or (bare repository)
 # ⬆ 1 - how many commits on this branch not in the remote branch. You need to push changes to remote.
 # ⬇ 1 - how many commits on the remote branch not in this branch. You need to pull changes from remote.
-# (1/2/3/4) - The count of changes in the repository:
+# 1/2/3/4 - The count of changes in the repository:
 # 1 - the number of staged changes. (green)
 # 2 - the number of unstaged changes. (yellow)
 # 3 - the number of unmerged changes. (magenta)
 # 4 - the number of untracked changes. (red)
-# {1} - the number of stashed changes. (yellow brackets)
+# |1 - the number of stashed changes. (yellow)
 #
 
 function cmd( c )
@@ -32,14 +34,35 @@ function cmd( c )
 }
 
 BEGIN {
-    
-    if(seperator == "") {
-        seperator = "⑆";
+    #colors:
+    black="\033[30m";
+    dark_gray="\033[01;30m";
+    red="\033[31m";
+    bright_red="\033[1;31m";
+    green="\033[32m";
+    bright_green="\033[1;32m";
+    yellow="\033[33m";
+    bright_yellow="\033[1;33m";
+    blue="\033[34m";
+    bright_blue="\033[1;34m";
+    violet="\033[35m";
+    bright_violet="\033[1;35m";
+    cyan="\033[036m";
+    bright_cyan="\033[1;36m";
+    white="\033[37m";
+    light_gray="\033[00;37m";
+    end_color="\033[0m";
+
+    if(separator == "") {
+        separator = "|";
     }
 
-    if(subSeperator =="") {
-        subSeperator = "∙";
+    if(separator2 == "") {
+        separator2 = "-";
     }
+
+    separator = dark_gray separator end_color;
+    separator2 = dark_gray separator2 end_color;
 
     isRepo = 0;
 
@@ -134,29 +157,11 @@ BEGIN {
 
 }
 END {
-    #colors:
-    black="\033[30m";
-    dark_gray="\033[01;30m";
-    red="\033[31m";
-    bright_red="\033[1;31m";
-    green="\033[32m";
-    bright_green="\033[1;32m";
-    yellow="\033[33m";
-    bright_yellow="\033[1;33m";
-    blue="\033[34m";
-    bright_blue="\033[1;34m";
-    violet="\033[35m";
-    bright_violet="\033[1;35m";
-    cyan="\033[036m";
-    bright_cyan="\033[1;36m";
-    white="\033[37m";
-    light_gray="\033[00;37m";
-    end_color="\033[0m";
 
     output = "";
     if(isRepo == 1) {
 
-        branchOutput = dark_gray seperator " ";
+        branchOutput = separator " ";
 
         if(bareRepo == 1) {
             branchOutput = branchOutput bright_cyan "(bare repository)";
@@ -164,7 +169,7 @@ END {
             branchOutput = branchOutput bright_cyan branch;
         }
 
-        output = output branchOutput dark_gray " " seperator " " end_color;
+        output = output branchOutput " " separator " ";
 
         if(bareRepo != 1) {
 
@@ -176,22 +181,22 @@ END {
                     output = output bright_yellow "⬇ " end_color behind;
                 }
 
-                output = output dark_gray " " seperator " " end_color;
+                output = output " " separator " ";
             }
 
             #if there are changes show the output.
             if(changes["staged"] > 0 || changes["unstaged"] > 0 || changes["untracked"] > 0 || changes["unmerged"] > 0) {
 
-                output = output bright_green changes["staged"];
-                output = output end_color subSeperator;
+                output = output bright_green changes["staged"] end_color;
+                output = output separator2;
 
-                output = output bright_yellow changes["unstaged"];
-                output = output end_color subSeperator;
+                output = output bright_yellow changes["unstaged"] end_color;
+                output = output separator2;
 
-                output = output violet changes["unmerged"];
-                output = output end_color subSeperator;
+                output = output violet changes["unmerged"] end_color;
+                output = output separator2;
 
-                output = output bright_red changes["untracked"];
+                output = output bright_red changes["untracked"] end_color;
                 output = output " ";
 
             } else {
@@ -199,7 +204,7 @@ END {
             }  
             
             if(stashCount > 0) {
-                output = output dark_gray seperator end_color bright_yellow stashCount end_color;
+                output = output separator bright_yellow stashCount end_color;
             }
         } else {
             output = output  "no branch ";
