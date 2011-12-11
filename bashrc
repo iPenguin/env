@@ -27,6 +27,8 @@ alias grep='grep --color'
 alias git-netbook='git pull --tags netbook working'
 alias git-desktop='git pull --all --tags'
 
+alias ro.lan='ssh -i ~/.ssh/ro.lan_rsa root@ro.lan -p2220'
+
 alias add='git add'
 alias status='git status'
 alias tag='git tag'
