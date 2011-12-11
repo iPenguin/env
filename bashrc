@@ -41,7 +41,7 @@ alias sshsws='ssh -i ~/.ssh/StitchWorksSoftware_dsa stitchw1@stitchworkssoftware
 alias sshhome='ssh bcmilco.homelinux.org -p 2222'
 
 alias make='make -j4'
-alias sloccount='sloccount --effort 1 .7 --schedule 1 1'
+alias sloccount='sloccount --effort 1 1 --schedule 1 1'
 alias top='htop'
 
 # ⚫ ❨ ❩ ⬆ ⬇ ⑈ ⑉ ǁ ║ ⑆ ⑇ ⟅ ⟆ ⬅ ➤ ➥ ➦ ➡
