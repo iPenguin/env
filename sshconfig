@@ -14,3 +14,8 @@ host macbook
 Host *
     ControlMaster auto
     ControlPath /tmp/ssh-%r@%h:%p
+
+Host hm
+    HostName stitchworkssoftware.com
+    User stitchw1
+    IdentityFile /home/brian/.ssh/id_rsa2

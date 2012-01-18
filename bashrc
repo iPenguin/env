@@ -52,7 +52,7 @@ SEPARATOR="ǁ"
 SEPARATOR2="⚫"
 
 HISTSIZE=5000
-PATH="~/bin:~/env.git/bin:$PATH"
+PATH="$HOME/bin:$HOME/env.git/bin:$PATH"
 EDITOR="/usr/bin/vim"
 
 function parse_git_output {
