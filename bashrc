@@ -15,7 +15,6 @@
 #linux
 #alias ls='ls -aFh --color'
 
-alias ls='ls --color'
 alias lsd='ls -aFh --color --group-directories-first'
 alias cp='cp -i'
 alias df='df -h'
