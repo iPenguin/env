@@ -18,4 +18,4 @@ Host *
 Host hm
     HostName stitchworkssoftware.com
     User stitchw1
-    IdentityFile /home/brian/.ssh/id_rsa2
+    IdentityFile /Users/brian/.ssh/StitchWorksSoftware_dsa
