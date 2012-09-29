@@ -15,6 +15,8 @@
 #linux
 #alias ls='ls -aFh --color'
 
+export COPY_EXTENDED_ATTRIBUTES_DISABLE=true
+
 alias lsd='ls -aFh --color --group-directories-first'
 alias cp='cp -i'
 alias df='df -h'
@@ -44,7 +46,7 @@ alias sshhome='ssh bcmilco.homelinux.org -p 2222'
 
 alias make='make -j4'
 alias sloccount='sloccount --effort 1 1 --schedule 1 1'
-alias top='htop'
+#alias top='htop'
 
 # ⚫ ❨ ❩ ⬆ ⬇ ⑈ ⑉ ǁ ║ ⑆ ⑇ ⟅ ⟆ ⬅ ➤ ➥ ➦ ➡
 SEPARATOR="ǁ"
