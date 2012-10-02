@@ -13,7 +13,7 @@ host macbook
 host ro.lan
     hostname 192.168.0.1
     port 2220
-    IdentityFile /Users/brian/.ssh/id_rsa
+    IdentityFile /home/brian/.ssh/id_rsa
 
 Host *
     ControlMaster auto
@@ -22,4 +22,4 @@ Host *
 Host hm
     HostName stitchworkssoftware.com
     User stitchw1
-    IdentityFile /Users/brian/.ssh/StitchWorksSoftware_dsa
+    IdentityFile /home/brian/.ssh/StitchWorksSoftware_dsa
