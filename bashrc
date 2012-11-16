@@ -48,13 +48,13 @@ alias make='make -j4'
 alias sloccount='sloccount --effort 1 1 --schedule 1 1'
 #alias top='htop'
 
-# ⚫ ❨ ❩ ⬆ ⬇ ⑈ ⑉ ǁ ║ ⑆ ⑇ ⟅ ⟆ ⬅ ➤ ➥ ➦ ➡
-SEPARATOR="ǁ"
-SEPARATOR2="⚫"
-
 HISTSIZE=5000
 PATH="$HOME/bin:$HOME/env.git/bin:$HOME/env/bin:$PATH"
 EDITOR="/usr/bin/vim"
+
+# ⚫ ❨ ❩ ⬆ ⬇ ⑈ ⑉ ǁ ║ ⑆ ⑇ ⟅ ⟆ ⬅ ➤ ➥ ➦ ➡
+SEPARATOR="ǁ"
+SEPARATOR2="⚫"
 
 function parse_git_output {
 
