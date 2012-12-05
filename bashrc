@@ -28,7 +28,7 @@ alias grep='grep --color'
 alias git-netbook='git pull --tags netbook working'
 alias git-desktop='git pull --all --tags'
 
-alias ro.lan='ssh -i ~/.ssh/ro.lan_rsa root@ro.lan -p2220'
+alias ro.lan='ssh -t -i ~/.ssh/ro.lan_rsa root@ro.lan -p2220'
 
 alias add='git add'
 alias status='git status'
@@ -42,7 +42,7 @@ alias checkout='git checkout'
 
 alias sftpsws='sftp -i ~/.ssh/StitchWorksSoftware_dsa stitchw1@stitchworkssoftware.com'
 alias sshsws='ssh -i ~/.ssh/StitchWorksSoftware_dsa stitchw1@stitchworkssoftware.com'
-alias sshhome='ssh bcmilco.homelinux.org -p 2222'
+alias sshhome='ssh -t bcmilco.homelinux.org -p 2222 "/usr/sbin/screen -dR"'
 
 alias make='make -j4'
 alias sloccount='sloccount --effort 1 1 --schedule 1 1'

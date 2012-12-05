@@ -13,7 +13,14 @@ host macbook
 host ro.lan
     hostname 192.168.0.1
     port 2220
-    IdentityFile /home/brian/.ssh/id_rsa
+    IdentityFile /home/brian/.ssh/brian_rsa
+host github.com
+    hostname github.com
+    IdentityFile /home/brian/.ssh/github_rsa
+host bcmilco.homelinux.org
+    hostname bcmilco.homelinux.org
+    user brian
+    IdentityFile /home/brian/.ssh/brian_rsa
 
 Host *
     ControlMaster auto
