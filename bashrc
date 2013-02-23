@@ -42,7 +42,7 @@ alias checkout='git checkout'
 
 alias sftpsws='sftp -i ~/.ssh/StitchWorksSoftware_dsa stitchw1@stitchworkssoftware.com'
 alias sshsws='ssh -i ~/.ssh/StitchWorksSoftware_dsa stitchw1@stitchworkssoftware.com'
-alias sshhome='ssh -t bcmilco.homelinux.org -p 2222 "/usr/sbin/screen -dR"'
+alias sshhome='ssh -i ~/.ssh/brian_rsa brian@bcmilco.homelinux.org -p 2222'
 
 alias make='make -j4'
 alias sloccount='sloccount --effort 1 1 --schedule 1 1'
