@@ -38,3 +38,5 @@ Host pi
     HostName pi
     User brian
     IdentityFile /home/brian/.ssh/brian_rsa
+Host=cmake.org
+  IdentityFile ~/.ssh/id_git_cmake
