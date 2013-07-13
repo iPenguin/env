@@ -3,3 +3,5 @@
 	email = bcmilco@gmail.com
 [color]
 	ui = true
+[push]
+	default = simple
