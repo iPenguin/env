@@ -15,6 +15,8 @@
 #linux
 #alias ls='ls -aFh --color'
 
+export COPY_EXTENDED_ATTRIBUTES_DISABLE=true
+
 alias lsd='ls -aFh --color --group-directories-first'
 alias cp='cp -i'
 alias df='df -h'
@@ -26,7 +28,7 @@ alias grep='grep --color'
 alias git-netbook='git pull --tags netbook working'
 alias git-desktop='git pull --all --tags'
 
-alias ro.lan='ssh -i ~/.ssh/ro.lan_rsa root@ro.lan -p2220'
+alias ro.lan='ssh -t -i ~/.ssh/ro.lan_rsa root@ro.lan -p2220'
 
 alias add='git add'
 alias status='git status'
@@ -40,19 +42,19 @@ alias checkout='git checkout'
 
 alias sftpsws='sftp -i ~/.ssh/StitchWorksSoftware_dsa stitchw1@stitchworkssoftware.com'
 alias sshsws='ssh -i ~/.ssh/StitchWorksSoftware_dsa stitchw1@stitchworkssoftware.com'
-alias sshhome='ssh bcmilco.homelinux.org -p 2222'
+alias sshhome='ssh -i ~/.ssh/brian_rsa brian@bcmilco.homelinux.org -p 2222'
 
 alias make='make -j4'
 alias sloccount='sloccount --effort 1 1 --schedule 1 1'
-alias top='htop'
+#alias top='htop'
+
+HISTSIZE=5000
+PATH="$HOME/bin:$HOME/env.git/bin:$HOME/env/bin:$PATH"
+EDITOR="/usr/bin/vim"
 
 # ⚫ ❨ ❩ ⬆ ⬇ ⑈ ⑉ ǁ ║ ⑆ ⑇ ⟅ ⟆ ⬅ ➤ ➥ ➦ ➡
 SEPARATOR="ǁ"
 SEPARATOR2="⚫"
-
-HISTSIZE=5000
-PATH="$HOME/bin:$HOME/env.git/bin:$PATH"
-EDITOR="/usr/bin/vim"
 
 function parse_git_output {
 

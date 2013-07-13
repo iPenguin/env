@@ -3,5 +3,19 @@
 	email = bcmilco@gmail.com
 [color]
 	ui = true
+[alias]
+    st = status
+    co = checkout
+    cm = commit
+    ds = diff --staged
+    vtree = log --graph --simplify-by-decoration --pretty=format:'%d' --all
+    tree = log --graph --pretty=format':%s %Cblue%an, %ar %Cgreen(%h)%Creset'	
+	
+[giggle]
+	main-window-maximized = true
+	main-window-geometry = 504x279+0+0
+	history-view-vpane-position = 508
+	file-view-vpane-position = 704
+	main-window-view = HistoryView
 [push]
 	default = simple
