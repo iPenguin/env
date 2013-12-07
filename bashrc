@@ -25,8 +25,6 @@ alias mv='mv -i'
 alias rm='rm -i'
 alias less='less -R'
 alias grep='grep --color'
-alias git-netbook='git pull --tags netbook working'
-alias git-desktop='git pull --all --tags'
 
 alias ro.lan='ssh -t -i ~/.ssh/ro.lan_rsa root@ro.lan -p2220'
 
@@ -49,7 +47,7 @@ alias sloccount='sloccount --effort 1 1 --schedule 1 1'
 #alias top='htop'
 
 HISTSIZE=5000
-PATH="$HOME/bin:$HOME/env.git/bin:$HOME/env/bin:$PATH"
+PATH="$HOME/bin:$HOME/env/bin:$PATH:/sbin:/usr/sbin:/usr/local/sbin"
 EDITOR="/usr/bin/vim"
 
 # ⚫ ❨ ❩ ⬆ ⬇ ⑈ ⑉ ǁ ║ ⑆ ⑇ ⟅ ⟆ ⬅ ➤ ➥ ➦ ➡

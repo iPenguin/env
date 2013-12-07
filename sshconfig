@@ -1,30 +1,35 @@
+Host *
+    ControlMaster auto
+    ControlPath /tmp/ssh-%r@%h:%p
+
 host desktop
     hostname 192.168.0.125
     user brian
-host media-center
-    hostname 192.168.0.150
+
+host media
+    hostname media.lan
     user brian
-host netbook
-    hostname 192.168.0.110
-    user brian
-host macbook
-    hostname 192.168.0.135
-    user brian
+
 host ro.lan
-    hostname 192.168.0.1
+    hostname ro.lan
     port 2220
     IdentityFile /home/brian/.ssh/brian_rsa
+
+host router 
+    hostname router.lan
+    port 2220
+    user root
+    IdentityFile /home/brian/.ssh/ro.lan_rsa
+
 host github.com
     hostname github.com
     IdentityFile /home/brian/.ssh/github_rsa
+
 host bcmilco.homelinux.org
     hostname bcmilco.homelinux.org
     user brian
     IdentityFile /home/brian/.ssh/brian_rsa
 
-Host *
-    ControlMaster auto
-    ControlPath /tmp/ssh-%r@%h:%p
 host stitchworkssoftware.com
     User stitchw1
     IdentityFile /home/brian/.ssh/StitchWorksSoftware_dsa
@@ -34,9 +39,12 @@ Host hm
     User stitchw1
     IdentityFile /home/brian/.ssh/StitchWorksSoftware_dsa
 
-Host pi
-    HostName pi
+Host server.lan
+    HostName server.lan
     User brian
     IdentityFile /home/brian/.ssh/brian_rsa
-Host=cmake.org
-  IdentityFile ~/.ssh/id_git_cmake
+
+Host server
+    HostName server
+    User brian
+    IdentityFile /home/brian/.ssh/brian_rsa
