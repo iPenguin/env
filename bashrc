@@ -50,9 +50,9 @@ HISTSIZE=5000
 PATH="$HOME/bin:$HOME/env/bin:$PATH:/sbin:/usr/sbin:/usr/local/sbin"
 EDITOR="/usr/bin/vim"
 
-# ⚫ ❨ ❩ ⬆ ⬇ ⑈ ⑉ ǁ ║ ⑆ ⑇ ⟅ ⟆ ⬅ ➤ ➥ ➦ ➡
+# • ❨ ❩ ⬆ ⬇ ⑈ ⑉ ǁ ║ ⑆ ⑇ ⟅ ⟆ ⬅ ➤ ➥ ➦ ➡
 SEPARATOR="ǁ"
-SEPARATOR2="⚫"
+SEPARATOR2="•"
 
 function parse_git_output {
 

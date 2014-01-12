@@ -8,7 +8,7 @@ host desktop
 
 host media
     hostname media.lan
-    user brian
+    user root
 
 host ro.lan
     hostname ro.lan
