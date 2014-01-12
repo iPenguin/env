@@ -11,15 +11,6 @@
     vtree = log --graph --simplify-by-decoration --pretty=format:'%d' --all
     tree = log --graph --pretty=format':%s %Cblue%an, %ar %Cgreen(%h)%Creset'	
 	
-[core]
-	quotepath = false
-	excludesfile = /Users/brian/.gitignore
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
 [giggle]
 	main-window-maximized = true
 	main-window-geometry = 436x219+0+0
