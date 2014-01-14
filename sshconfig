@@ -1,6 +1,7 @@
 Host *
     ControlMaster auto
-    ControlPath /tmp/ssh-%r@%h:%p
+    ControlPath ~/.ssh/ssh-%r@%h:%p
+    ControlPersist 4h
 
 host desktop
     hostname 192.168.0.125
