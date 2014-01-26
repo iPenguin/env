@@ -94,7 +94,6 @@ BEGIN {
     }
 
     test=$1 " " $2 " " $3;
-
     if(test == "# On branch") {
         branch = $4;
         next;
@@ -128,6 +127,7 @@ BEGIN {
         next;
     } else if(test == "# Your branch") { #branch is ahead/behind
 
+        skip = 1;
         if($5 == "ahead") {
             ahead = $9;
         } else if($5 == "behind") {
