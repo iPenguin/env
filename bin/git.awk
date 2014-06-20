@@ -93,39 +93,37 @@ BEGIN {
         next;
     }
 
-    test=$1 " " $2 " " $3;
-    if(test == "# On branch") {
-        branch = $4;
+    test=$1 " " $2;
+    if(test == "On branch") {
+        branch = $3;
         next;
-    } else if(test == "# Changes to") { #staged
+    } else if(test == "Changes to") { #staged
         skip = 1;
         staged = 1;
         tracked = 1;
         merged = 1;
         next;
-    } else if(test == "# Changes not") { #unstaged
+    } else if(test == "Changes not") { #unstaged
         skip = 3;
         staged = 0;
         tracked = 1;
         merged = 1;
         next;
-    } else if(test == "# Untracked files:") {#untracked
+    } else if(test == "Untracked files:") {#untracked
         skip = 2;
         staged = 0;
         tracked = 0;
         merged = 1;
         next;
-    } else if(test == "# Unmerged paths:") {#unmerged
+    } else if(test == "Unmerged paths:") {#unmerged
         skip = 2;
         staged = 0;
         tracked = 1;
         merged = 0;
         next;
-    } else if($1 != "#") {
+    } else if(test == "Initial commit") {
         next;
-    } else if(test == "# Initial commit") {
-        next;
-    } else if(test == "# Your branch") { #branch is ahead/behind
+    } else if(test == "Your branch") { #branch is ahead/behind
 
         skip = 1;
         if($5 == "ahead") {
@@ -134,16 +132,16 @@ BEGIN {
             behind = $8;
         }         
         next;
-    } else if(test == "# and have") { #branches have diverged
+    } else if(test == "and have") { #branches have diverged
         ahead = $4;
         behind = $6;
         next;
-    } else if(test == "# Not currently") {#detached HEAD
+    } else if(test == "Not currently") {#detached HEAD
         branch = "(no branch)";
     }
 
     #Don't count blank lines
-    if($0 == "#")
+    if($0 == "")
         next;
 
     if(staged == 1)
