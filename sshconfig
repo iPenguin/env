@@ -24,6 +24,7 @@ host router
 
 host github.com
     hostname github.com
+    user iPenguin
     IdentityFile /home/brian/.ssh/github_rsa
 
 host bcmilco.homelinux.org
