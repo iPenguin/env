@@ -59,7 +59,7 @@ SEPARATOR2="•"
 
 function parse_git_output {
 
-    output=$(git status 2> /dev/null | git.awk -v separator=$SEPARATOR separator2=$SEPARATOR2 2> /dev/null) || return
+    output=$(git status -sb --porcelain 2> /dev/null | git.awk -v separator=$SEPARATOR separator2=$SEPARATOR2 2> /dev/null) || return
     echo -e "$output";
 }
 
