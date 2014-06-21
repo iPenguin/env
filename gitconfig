@@ -2,7 +2,7 @@
 	name = Brian C. Milco
 	email = bcmilco@gmail.com
 [color]
-	ui = true
+	ui = auto
 [alias]
     st = status
     co = checkout
