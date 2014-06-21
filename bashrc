@@ -1,4 +1,4 @@
-#
+#!/bin/bash
 #To include this file add the following line to ~/.bashrc
 # . "/Users/brian/env.git/bashrc" 
 #
@@ -54,17 +54,22 @@ PATH="$HOME/bin:$HOME/env/bin:$PATH:/sbin:/usr/sbin:/usr/local/sbin"
 EDITOR="/usr/bin/vim"
 
 # • ❨ ❩ ⬆ ⬇ ⑈ ⑉ ǁ ║ ⑆ ⑇ ⟅ ⟆ ⬅ ➤ ➥ ➦ ➡
-SEPARATOR="ǁ"
-SEPARATOR2="•"
+SEP="║"
+SEP2="•"
 
 function parse_git_output {
-
-    output=$(git status -sb --porcelain 2> /dev/null | git.awk -v separator=$SEPARATOR separator2=$SEPARATOR2 2> /dev/null) || return
-    echo -e "$output";
+    path=$(pwd)
+    # Don't do git status over networked paths. 
+    # It kills performance, and the prompt takes forever to return.
+    if [[ $path =~ "/net/" ]]; then
+        return
+    fi
+    output=$(git status -sb --porcelain 2> /dev/null | git.awk -v separator=$SEP separator2=$SEP2 2> /dev/null) || return
+    echo -e "$output"
 }
 
 BLACK="\[\e[00;30m\]"
-DARY_GRAY="\[\e[01;30m\]"
+DARK_GRAY="\[\e[01;30m\]"
 RED="\[\e[00;31m\]"
 BRIGHT_RED="\[\e[01;31m\]"
 GREEN="\[\e[00;32m\]"
@@ -79,14 +84,16 @@ CYAN="\[\e[00;36m\]"
 BRIGHT_CYAN="\[\e[01;36m\]"
 LIGHT_GRAY="\[\e[00;37m\]"
 WHITE="\[\e[01;37m\]"
-ENDCOLOR="\e[m"
+ENDC="\e[m"
 
 
 if [ "$SSH_CONNECTION" == "" ]; then
-    PS1="${BRIGHT_RED}#--[ ${GREEN}\h ${DARY_GRAY}${SEPARATOR} ${BRIGHT_BLUE}\w \$(parse_git_output)${BRIGHT_RED}]\\$ --≻${ENDCOLOR}\n"
+    HCOLOR="$GREEN"
 else
-    PS1="${BRIGHT_RED}#--[ ${YELLOW}\h ${DARY_GRAY}${SEPARATOR} ${BRIGHT_BLUE}\w \$(parse_git_output)${BRIGHT_RED}]\\$ --≻${ENDCOLOR}\n"
+    HCOLOR="$YELLO"
 fi
+
+PS1="${BRIGHT_RED}#--[ ${HCOLOR}\h ${DARK_GRAY}${SEP} ${BRIGHT_BLUE}\w \$(parse_git_output)${BRIGHT_RED}]\\$ --≻${ENDC}\n"
 
 export PATH EDITOR HISTSIZE
 
