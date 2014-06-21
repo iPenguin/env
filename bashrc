@@ -15,6 +15,9 @@
 #linux
 #alias ls='ls -aFh --color'
 
+#
+#use glances instead of top
+
 export COPY_EXTENDED_ATTRIBUTES_DISABLE=true
 
 alias lsd='ls -aFh --color --group-directories-first'
