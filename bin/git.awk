@@ -108,9 +108,9 @@ END {
     if(repo) {
 
         if(bareRepo ~ "true") {
-            output = output "(bare repository) " separator " ";
+            output = output "(bare repository) ";
         } else {
-            output = output branch " " separator " ";
+            output = output branch " ";
 
             if(ahead > 0) {
                 output = output bright_yellow "⬆" endc ahead " ";
