@@ -7,20 +7,6 @@
 #
 # Use -v separator="|" separator2="/" to use other field separators.
 #
-# Sample output:
-#
-# | master | ⬆ 1 ⬇ 1 | 1/2/3/4 |1
-#
-# What the output means:
-#
-# | - separator
-# master - the branch name or (no branch) or (bare repository)
-# ⬆ 1 - how many commits on this branch not in the remote branch. You need to push changes to remote.
-# ⬇ 1 - how many commits on the remote branch not in this branch. You need to pull changes from remote.
-# 1/2/3/4 - The count of changes in the repository: 
-# staged (green) / unstaged (yellow) / unmerged (magenta) / untracked (red)
-# |1 - the number of stashed changes. (yellow)
-#
 
 function cmd( c )
 {
