@@ -63,13 +63,21 @@ BEGIN {
 
         branch = (array[1] == "" ? $2 : array[1]);
 
-        if( $3 ~ "ahead" ) {
-            split($4, commits, "\]");
-            ahead = commits[1];
-        }
-        if( $3 ~ "behind" ) {
-            split($4, commits, "\]");
-            behind = commits[1];
+        if( $0 ~ "\\[" ) {
+            split($0, ab, "\[");
+            sub("\]", "", ab[2]);
+
+            split(ab[2], ab, " ");
+            idx = 1;
+            if( ab[idx] ~ "ahead" ) {
+                ahead = ab[idx + 1];
+                sub(",", "", ahead);
+                idx += 2;
+            }
+
+            if( ab[idx] ~ "behind" ) {
+                behind = ab[idx + 1];
+            }
         }
     } else {
 
@@ -105,10 +113,10 @@ END {
             output = output branch " " separator " ";
 
             if(ahead > 0) {
-                output = output bright_yellow "⬆ " endc ahead " " separator " ";
+                output = output bright_yellow "⬆" endc ahead " ";
             }
             if (behind > 0) {
-                output = output bright_yellow "⬇ " endc behind " " separator " ";
+                output = output bright_yellow "⬇" endc behind " ";
             }
 
             #if there are any changes show them.
@@ -120,8 +128,6 @@ END {
                 output = output violet changes["unmerged"] endc separator2;
                 output = output bright_red changes["untracked"] endc " ";
 
-            } else {
-                output = output "no changes ";
             }
 
             if(stashCount > 0) {
