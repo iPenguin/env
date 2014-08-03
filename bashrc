@@ -28,6 +28,7 @@ alias mv='mv -i'
 alias rm='rm -i'
 alias less='less -R'
 alias grep='grep --color'
+alias ping6='ping6 -n'
 
 alias ro.lan='ssh -t -i ~/.ssh/ro.lan_rsa root@ro.lan -p2220'
 
