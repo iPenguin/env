@@ -20,7 +20,7 @@ host router
     hostname router.lan
     port 2220
     user root
-    IdentityFile /home/brian/.ssh/ro.lan_rsa
+    IdentityFile /home/brian/.ssh/brian_rsa
 
 host github.com
     hostname github.com
