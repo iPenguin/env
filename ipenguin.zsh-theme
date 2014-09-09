@@ -29,9 +29,13 @@ function parse_git_output () {
     output=$(git status -sb --porcelain 2> /dev/null | git-details-zsh.awk 2> /dev/null)
     echo "$output"
 }
+BATTERY_GAUGE_PREFIX='⟪'
+BATTERY_GAUGE_SUFFIX='⟫'
+BATTERY_GAUGE_FILLED_SYMBOL='▪'
+BATTERY_GAUGE_EMPTY_SYMBOL='▫'
 
 precmd () {
-    RPROMPT="$(parse_git_output)"
+    RPROMPT="$(parse_git_output) $(battery_level_gauge)"
 }
 
 PROMPT="
