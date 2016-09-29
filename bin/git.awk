@@ -28,6 +28,7 @@ BEGIN {
 }
 {
     if($0 ~ "##") {
+        #match requires gawk
         match($2, /(.+)\.\.\.(.+)/, array); #branch w/remote
         branch = (array[1] == "" ? $2 : array[1]);
 
