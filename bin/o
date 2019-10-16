@@ -3,5 +3,5 @@
 # quick open files by type
 #
 
-`which kde-open` "$1"
+`which kde-open5` "$1"
 
