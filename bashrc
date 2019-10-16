@@ -31,24 +31,34 @@ alias grep='grep --color'
 alias ping6='ping6 -n'
 
 alias ro.lan='ssh -t -i ~/.ssh/ro.lan_rsa root@ro.lan -p2220'
-
-alias add='git add'
-alias status='git status'
-alias tag='git tag'
-alias gd='git diff'
-alias ver='git describe'
-alias commit='git commit'
-alias push='git push'
-alias pull='git pull'
-alias checkout='git checkout'
-
-alias sftpsws='sftp -i ~/.ssh/StitchWorksSoftware_dsa stitchw1@stitchworkssoftware.com'
-alias sshsws='ssh -i ~/.ssh/StitchWorksSoftware_dsa stitchw1@stitchworkssoftware.com'
 alias sshhome='ssh -i ~/.ssh/brian_rsa brian@bcmilco.homelinux.org -p 2222'
 
 alias make='make -j4'
-alias sloccount='sloccount --effort 1 1 --schedule 1 1'
 #alias top='htop'
+
+# Colorized man pages, from:
+# http://boredzo.org/blog/archives/2016-08-15/colorized-man-pages-understood-and-customized
+man() {
+        env \
+                LESS_TERMCAP_md=$(printf "\e[1;36m") \
+                LESS_TERMCAP_me=$(printf "\e[0m") \
+                LESS_TERMCAP_se=$(printf "\e[0m") \
+                LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
+                LESS_TERMCAP_ue=$(printf "\e[0m") \
+                LESS_TERMCAP_us=$(printf "\e[1;32m") \
+                man "$@"
+}
+
+
+alias bigdirs='du --max-depth=1 2> /dev/null | sort -n -r | head -n20'
+
+
+# Where is a function defined?
+whichfunc() {
+        whence -v $1
+        type -a $1
+}
+
 
 HISTSIZE=5000
 PATH="$HOME/bin:$HOME/env/bin:$PATH:/sbin:/usr/sbin:/usr/local/sbin"
