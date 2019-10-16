@@ -1,15 +1,9 @@
+IdentityFile /home/brian/.ssh/old_keys/brian_rsa
+
 Host *
     ControlMaster auto
     ControlPath ~/.ssh/ssh-%r@%h:%p
     ControlPersist 4h
-
-host desktop
-    hostname 192.168.0.125
-    user brian
-
-host media
-    hostname media.lan
-    user root
 
 host ro.lan
     hostname ro.lan
@@ -31,15 +25,6 @@ host bcmilco.homelinux.org
     hostname bcmilco.homelinux.org
     user brian
     IdentityFile /home/brian/.ssh/brian_rsa
-
-host stitchworkssoftware.com
-    User stitchw1
-    IdentityFile /home/brian/.ssh/StitchWorksSoftware_dsa
-
-Host hm
-    HostName stitchworkssoftware.com
-    User stitchw1
-    IdentityFile /home/brian/.ssh/StitchWorksSoftware_dsa
 
 Host server.lan
     HostName server.lan
