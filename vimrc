@@ -14,6 +14,8 @@ set ruler "show the cursor position all the time.
 set expandtab "replace tabs with spaces
 set shiftwidth=4 "column count for automatic indentation
 set tabstop=4 "How many spaces = 1 tab
+set smarttab
+set smartindent
 
 set ofu=syntaxcomplete#Complete
 
@@ -50,3 +52,6 @@ map n nzz
 
 " Enable mouse support in console
 set mouse=a
+
+" keep the status bar present
+set laststatus=2
