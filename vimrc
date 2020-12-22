@@ -55,3 +55,5 @@ set mouse=a
 
 " keep the status bar present
 set laststatus=2
+
+autocmd FileType yaml setlocal ai ts=2 sw=2 et
