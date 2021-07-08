@@ -5,6 +5,7 @@ filetype indent on
 
 syntax on "syntax color highlighting
 
+set number "line numbers
 set hlsearch "highlight search results
 set norestorescreen "don't restore the screen to what it was before you entered vim
 set ruler "show the cursor position all the time.
