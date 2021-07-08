@@ -35,7 +35,7 @@ BATTERY_GAUGE_FILLED_SYMBOL='▪'
 BATTERY_GAUGE_EMPTY_SYMBOL='▫'
 
 precmd () {
-    RPROMPT="$(parse_git_output) $(battery_level_gauge)"
+    RPROMPT="$(parse_git_output) %{$fg[red]%}⟅%{$reset_color%}%!%{$fg[red]%}⟆%{$reset_color%}"
 }
 
 PROMPT="
