@@ -41,7 +41,7 @@ set showmatch
 " " How many tenths of a second to blink when matching brackets
 set mat=2
 
-" Turn backup off, since most stuff is in SVN, git etc. anyway...
+" Turn backup off
 set nobackup
 set nowb
 set noswapfile
