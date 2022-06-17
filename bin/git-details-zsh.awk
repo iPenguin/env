@@ -42,9 +42,9 @@ BEGIN {
 }
 {
     if($0 ~ "##") {
-        match($0, /HEAD \((.+)\)/, noBranch);
-
-        if( noBranch[1] == "no branch" ) {
+        match_location = match($0, /No commits/);
+        
+        if( match_location > 0 ) {
             branch = "(no branch)"
             next;
         }
